@@ -160,6 +160,7 @@
     "react-gtm-module": "^2.0.11",
     "react-helmet": "^6.1.0",
     "react-indiana-drag-scroll": "^2.0.1",
+    "react-joyride": "^2.5.0",
     "react-use": "^15.3.4",
     "recharts": "^2.1.6",
     "swiper": "^8.0.7",
@@ -167,4 +168,3 @@
     "uuidv4": "^6.2.12"
   }
 }
-

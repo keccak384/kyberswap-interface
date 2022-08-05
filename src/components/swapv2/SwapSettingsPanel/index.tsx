@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Box } from 'rebass'
-import { ArrowLeft } from 'react-feather'
+import { Flex, Box, Text } from 'rebass'
+import { ArrowLeft, Eye } from 'react-feather'
 import { Trans, t } from '@lingui/macro'
 import { rgba } from 'polished'
 import { isMobile } from 'react-device-detect'
-
+import { ButtonLight } from 'components/Button'
 import QuestionHelper from 'components/QuestionHelper'
 import { AutoColumn } from 'components/Column'
 import { RowBetween, RowFixed } from 'components/Row'
@@ -18,6 +18,7 @@ import {
   useToggleTradeRoutes,
   useShowTokenInfo,
   useToggleTokenInfo,
+  useTutorialSwapGuide,
 } from 'state/user/hooks'
 import useTheme from 'hooks/useTheme'
 import { useModalOpen, useToggleModal } from 'state/application/hooks'
@@ -55,6 +56,16 @@ const BackText = styled.span`
   color: ${({ theme }) => theme.text};
 `
 
+const ButtonViewGuide = styled(ButtonLight)`
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  width: 80px;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    width: 58px;
+  `};
+`
+
 const SettingsPanel: React.FC<Props> = ({ className, onBack, onClickLiquiditySources, onClickGasPriceTracker }) => {
   const theme = useTheme()
 
@@ -74,8 +85,16 @@ const SettingsPanel: React.FC<Props> = ({ className, onBack, onClickLiquiditySou
   const toggleMobileTradeRoutes = useToggleModal(ApplicationModal.MOBILE_TRADE_ROUTES)
   const toggleTradeRoutes = useToggleTradeRoutes()
   const toggleTokenInfo = useToggleTokenInfo()
+
   const isShowTrendingSoonTokens = useShowTopTrendingSoonTokens()
   const toggleTopTrendingTokens = useToggleTopTrendingTokens()
+
+  const setShowTutorialSwapGuide = useTutorialSwapGuide()[1]
+  const openTutorialSwapGuide = () => {
+    setShowTutorialSwapGuide({ show: true, step: 0 })
+    onBack()
+    mixpanelHandler(MIXPANEL_TYPE.TUTORIAL_CLICK_START)
+  }
 
   const handleToggleLiveChart = () => {
     if (isMobile) {
@@ -188,6 +207,20 @@ const SettingsPanel: React.FC<Props> = ({ className, onBack, onClickLiquiditySou
                   <QuestionHelper text={t`Turn on to display token info`} />
                 </RowFixed>
                 <Toggle isActive={isShowTokenInfo} toggle={toggleTokenInfo} />
+              </RowBetween>
+
+              <RowBetween>
+                <RowFixed>
+                  <span className="settingLabel">
+                    <Trans>Swap Guide</Trans>
+                  </span>
+                </RowFixed>
+                <ButtonViewGuide onClick={openTutorialSwapGuide}>
+                  {!isMobile && <Eye size={16} />}
+                  <Text style={{ marginLeft: 5, fontSize: 13 }}>
+                    <Trans>View</Trans>
+                  </Text>
+                </ButtonViewGuide>
               </RowBetween>
             </AutoColumn>
           </Flex>

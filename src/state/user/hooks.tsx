@@ -38,6 +38,7 @@ import {
   toggleTokenInfo,
   toggleFavoriteToken as toggleFavoriteTokenAction,
   ToggleFavoriteTokenPayload,
+  setShowTutorialSwapGuide,
 } from './actions'
 import { defaultShowLiveCharts } from './reducer'
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants'
@@ -474,6 +475,16 @@ export function useToggleTradeRoutes(): () => void {
 export function useToggleTokenInfo(): () => void {
   const dispatch = useDispatch<AppDispatch>()
   return useCallback(() => dispatch(toggleTokenInfo()), [dispatch])
+}
+
+type TutorialParam = { show?: boolean; step?: number }
+export function useTutorialSwapGuide(): [TutorialParam, (value: TutorialParam) => void] {
+  const dispatch = useDispatch<AppDispatch>()
+  const data = useSelector((state: AppState) => state.user.tutorialSwapGuide) || { show: false, step: 0 }
+  const setShow = useCallback(({ show, step }: TutorialParam) => dispatch(setShowTutorialSwapGuide({ show, step })), [
+    dispatch,
+  ])
+  return [data, setShow]
 }
 
 export function useToggleTopTrendingTokens(): () => void {

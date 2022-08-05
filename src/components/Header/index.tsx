@@ -22,6 +22,7 @@ import { ReactComponent as Dollar } from 'assets/svg/dollar.svg'
 import { ReactComponent as Visa } from 'assets/buy-crypto/visa.svg'
 import { ReactComponent as MasterCard } from 'assets/buy-crypto/master-card.svg'
 import { ReactComponent as DropdownSVG } from 'assets/svg/down.svg'
+import { TutorialSwapIds } from 'components/Tutorial/TutorialSwap'
 
 const VisaSVG = styled(Visa)`
   path {
@@ -382,45 +383,47 @@ export default function Header() {
             </Dropdown>
           </HoverDropdown>
 
-          <HoverDropdown active={pathname.toLowerCase().includes('pools')}>
-            <Flex alignItems="center">
-              <Trans>Earn</Trans>
-              <DropdownIcon />
-            </Flex>
-            <Dropdown>
-              <StyledNavLink
-                id={`pools-nav-link`}
-                to="/pools"
-                isActive={(match, { pathname }) => Boolean(match) || pathname.startsWith('/pools')}
-                style={{ width: '100%' }}
-              >
-                <Trans>Pools</Trans>
-              </StyledNavLink>
+          <Flex id={TutorialSwapIds.EARNING_LINKS} alignItems="center">
+            <HoverDropdown active={pathname.toLowerCase().includes('pools')}>
+              <Flex alignItems="center">
+                <Trans>Earn</Trans>
+                <DropdownIcon />
+              </Flex>
+              <Dropdown>
+                <StyledNavLink
+                  id={`pools-nav-link`}
+                  to="/pools"
+                  isActive={(match, { pathname }) => Boolean(match) || pathname.startsWith('/pools')}
+                  style={{ width: '100%' }}
+                >
+                  <Trans>Pools</Trans>
+                </StyledNavLink>
 
-              <StyledNavLink
-                id={`my-pools-nav-link`}
-                to={'/myPools'}
-                isActive={(match, { pathname }) =>
-                  Boolean(match) ||
-                  pathname.startsWith('/add') ||
-                  pathname.startsWith('/remove') ||
-                  pathname.startsWith('/create') ||
-                  (pathname.startsWith('/find') && pathname.endsWith('find'))
-                }
-              >
-                <Trans>My Pools</Trans>
-              </StyledNavLink>
-            </Dropdown>
-          </HoverDropdown>
+                <StyledNavLink
+                  id={`my-pools-nav-link`}
+                  to={'/myPools'}
+                  isActive={(match, { pathname }) =>
+                    Boolean(match) ||
+                    pathname.startsWith('/add') ||
+                    pathname.startsWith('/remove') ||
+                    pathname.startsWith('/create') ||
+                    (pathname.startsWith('/find') && pathname.endsWith('find'))
+                  }
+                >
+                  <Trans>My Pools</Trans>
+                </StyledNavLink>
+              </Dropdown>
+            </HoverDropdown>
 
-          <YieldMenuWrapper>
-            <StyledNavLink id={`farms-nav-link`} to={'/farms'} isActive={match => Boolean(match)}>
-              <Trans>Farm</Trans>
-            </StyledNavLink>
-          </YieldMenuWrapper>
+            <YieldMenuWrapper>
+              <StyledNavLink id={`farms-nav-link`} to={'/farms'} isActive={match => Boolean(match)}>
+                <Trans>Farm</Trans>
+              </StyledNavLink>
+            </YieldMenuWrapper>
+          </Flex>
 
           {!under369 && (
-            <CampaignWrapper>
+            <CampaignWrapper id={TutorialSwapIds.CAMPAIGN_LINK}>
               <StyledNavLink id={`campaigns`} to={'/campaigns'} isActive={match => Boolean(match)}>
                 <Trans>Campaigns</Trans>
                 {!under500 && (
@@ -432,7 +435,7 @@ export default function Header() {
             </CampaignWrapper>
           )}
 
-          <DiscoverWrapper>
+          <DiscoverWrapper id={TutorialSwapIds.DISCOVER_LINK}>
             <StyledNavLink
               to={'/discover?tab=trending_soon'}
               isActive={match => Boolean(match)}

@@ -22,6 +22,7 @@ import {
   toggleProLiveChart,
   toggleTopTrendingTokens,
   toggleFavoriteToken,
+  setShowTutorialSwapGuide,
 } from './actions'
 import { SupportedLocale } from 'constants/locales'
 import { isMobile } from 'react-device-detect'
@@ -78,6 +79,7 @@ export interface UserState {
       }
     >
   >
+  tutorialSwapGuide: { show: boolean; step: number }
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -127,6 +129,8 @@ export const initialState: UserState = {
   showTokenInfo: true,
   showTopTrendingSoonTokens: true,
   favoriteTokensByChainId: {},
+
+  tutorialSwapGuide: { show: true, step: 0 },
 }
 
 export default createReducer(initialState, builder =>
@@ -219,6 +223,11 @@ export default createReducer(initialState, builder =>
     })
     .addCase(toggleTokenInfo, state => {
       state.showTokenInfo = !state.showTokenInfo
+    })
+    .addCase(setShowTutorialSwapGuide, (state, { payload: { show, step } }) => {
+      if (!state.tutorialSwapGuide) state.tutorialSwapGuide = { show: true, step: 0 } // for old user
+      if (step !== undefined) state.tutorialSwapGuide.step = step
+      if (show !== undefined) state.tutorialSwapGuide.show = show
     })
     .addCase(toggleTopTrendingTokens, state => {
       state.showTopTrendingSoonTokens = !state.showTopTrendingSoonTokens

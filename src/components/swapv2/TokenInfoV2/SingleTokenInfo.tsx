@@ -13,7 +13,7 @@ import useTheme from 'hooks/useTheme'
 import { formatDollarAmount } from 'utils/numbers'
 import { formattedNum } from 'utils'
 
-import BlockWrapper from './BlockWrapper'
+import { CollapseItem } from 'components/Collapse'
 
 const NOT_AVAILABLE = '--'
 
@@ -125,7 +125,10 @@ export function HowToSwap({
   const toName = formatString(toCurrencyInfo.name || name2)
 
   return (
-    <BlockWrapper
+    <CollapseItem
+      style={{
+        borderRadius: '20px',
+      }}
       expandedOnMount={expandedOnMount}
       header={
         <AboutText>
@@ -140,7 +143,7 @@ export function HowToSwap({
           rates, and earn more with your {symbol1} token without needing to check rates across multiple platforms.
         </Text>
       </SwapInstruction>
-    </BlockWrapper>
+    </CollapseItem>
   )
 }
 
@@ -253,7 +256,10 @@ const SingleTokenInfo = ({
     },
   ]
   return (
-    <BlockWrapper
+    <CollapseItem
+      style={{
+        borderRadius: '20px',
+      }}
       expandedOnMount={expandedOnMount}
       header={
         <Flex alignItems="center">
@@ -282,7 +288,7 @@ const SingleTokenInfo = ({
           </InfoRow>
         ))}
       </InfoRowWrapper>
-    </BlockWrapper>
+    </CollapseItem>
   )
 }
 

@@ -98,6 +98,7 @@ import useParsedQueryString from 'hooks/useParsedQueryString'
 import { ReactComponent as TutorialSvg } from 'assets/svg/play_circle_outline.svg'
 import Tutorial, { TutorialType } from 'components/Tutorial'
 import { MouseoverTooltip } from 'components/Tooltip'
+import TutorialSwap, { TutorialSwapIds } from 'components/Tutorial/TutorialSwap/index'
 import { reportException } from 'utils/sentry'
 import { Z_INDEXS } from 'constants/styles'
 import { stringify } from 'qs'
@@ -708,7 +709,7 @@ export default function Swap({ history }: RouteComponentProps) {
        * => add canonical link that specify which is main page, => /swap/bnb/knc-to-usdt
        */}
       <SEOSwap canonicalUrl={canonicalUrl} />
-
+      <TutorialSwap />
       <TokenWarningModal
         isOpen={isShowModalImportToken}
         tokens={importTokensNotInDefault}
@@ -760,7 +761,9 @@ export default function Swap({ history }: RouteComponentProps) {
                       placement="top"
                       width="fit-content"
                     >
-                      <TransactionSettingsIcon fill={isExpertMode ? theme.warning : theme.subText} />
+                      <span id={TutorialSwapIds.BUTTON_SETTING}>
+                        <TransactionSettingsIcon fill={isExpertMode ? theme.warning : theme.subText} />
+                      </span>
                     </MouseoverTooltip>
                   </StyledActionButtonSwapForm>
                   {/* <TransactionSettings isShowDisplaySettings /> */}
@@ -775,7 +778,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 />
               </RowBetween>
 
-              <AppBodyWrapped data-highlight={shouldHighlightSwapBox}>
+              <AppBodyWrapped data-highlight={shouldHighlightSwapBox} id={TutorialSwapIds.SWAP_FORM}>
                 {activeTab === TAB.SWAP && (
                   <>
                     <Wrapper id="swap-page">

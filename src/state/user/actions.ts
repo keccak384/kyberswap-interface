@@ -39,6 +39,8 @@ export const toggleLiveChart = createAction<{ chainId: number }>('user/toggleLiv
 export const toggleTradeRoutes = createAction<void>('user/toggleTradeRoutes')
 export const toggleTokenInfo = createAction<void>('user/toggleTokenInfo')
 
+export const setShowTutorialSwapGuide = createAction<{ show?: boolean; step?: number }>('user/setShowTutorialSwapGuide')
+
 export const toggleTopTrendingTokens = createAction<void>('user/toggleTopTrendingTokens')
 export const toggleProLiveChart = createAction<void>('user/toggleProLiveChart')
 

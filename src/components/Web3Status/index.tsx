@@ -25,6 +25,7 @@ import Loader from '../Loader'
 import { RowBetween } from '../Row'
 import WalletModal from '../WalletModal'
 import { useMedia } from 'react-use'
+import { TutorialSwapIds } from 'components/Tutorial/TutorialSwap/index'
 
 const IconWrapper = styled.div<{ size?: number }>`
   ${({ theme }) => theme.flexColumnNoWrap};
@@ -159,7 +160,11 @@ function Web3StatusInner() {
 
   if (account) {
     return (
-      <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
+      <Web3StatusConnected
+        id={TutorialSwapIds.BUTTON_ADDRESS_WALLET}
+        onClick={toggleWalletModal}
+        pending={hasPendingTransactions}
+      >
         {hasPendingTransactions ? (
           <RowBetween>
             <Text>
@@ -185,7 +190,7 @@ function Web3StatusInner() {
     )
   } else {
     return (
-      <ButtonLight onClick={toggleWalletModal} padding="10px 12px">
+      <ButtonLight onClick={toggleWalletModal} padding="10px 12px" id={TutorialSwapIds.BUTTON_CONNECT_WALLET}>
         <Trans>Connect Wallet</Trans>
       </ButtonLight>
     )

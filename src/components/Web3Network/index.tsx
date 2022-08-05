@@ -12,6 +12,7 @@ import { ReactComponent as DropdownSvg } from 'assets/svg/down.svg'
 import { useETHBalances } from 'state/wallet/hooks'
 import { ChainId, CurrencyAmount } from '@kyberswap/ks-sdk-core'
 import { nativeOnChain } from 'constants/tokens'
+import { TutorialSwapIds } from 'components/Tutorial/TutorialSwap/index'
 
 const NetworkSwitchContainer = styled.div`
   display: flex;
@@ -81,7 +82,7 @@ function Web3Network(): JSX.Element | null {
   if (!chainId) return null
 
   return (
-    <NetworkCard onClick={() => toggleNetworkModal()} role="button">
+    <NetworkCard onClick={() => toggleNetworkModal()} role="button" id={TutorialSwapIds.SELECT_NETWORK}>
       <NetworkSwitchContainer>
         <Row>
           <img

@@ -167,7 +167,11 @@ const Pools = ({
 
         <FarmingPoolsMarquee tab={tab} />
 
-        {(tab === VERSION.ELASTIC ? above1260 : above1000) ? (
+        {(tab === VERSION.ELASTIC ? (
+          above1260
+        ) : (
+          above1000
+        )) ? (
           <ToolbarWrapper>
             <CurrencyWrapper>
               <PoolsCurrencyInputPanel
