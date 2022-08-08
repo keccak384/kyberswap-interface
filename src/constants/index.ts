@@ -757,6 +757,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Native wallet of Brave browser',
     href: null,
     color: '#cc1d83',
+    mobile: true,
   },
 }
 
